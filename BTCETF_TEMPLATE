@@ -1,0 +1,22 @@
+import requests
+
+def get_bitcoin_price():
+    # URL for a public API that returns Bitcoin prices
+    api_url = "https://api.coindesk.com/v1/bpi/currentprice/BTC.json"
+    
+    try:
+        response = requests.get(api_url)
+        data = response.json()
+        # Extracting the USD price of Bitcoin
+        price = data['bpi']['USD']['rate']
+        return price
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+
+if __name__ == "__main__":
+    price = get_bitcoin_price()
+    if price:
+        print(f"Current Bitcoin price (USD): {price}")
+    else:
+        print("Failed to retrieve Bitcoin price.")
